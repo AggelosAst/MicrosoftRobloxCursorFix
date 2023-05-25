@@ -72,11 +72,11 @@ table.insert(other_connections, UserInputService.InputBegan:Connect(function(key
         getgenv().enabled = not getgenv().enabled;
       elseif (keyboardInput.KeyCode == Enum.KeyCode[getgenv().terminate_key:upper()]) then
         for index, key in next, connections do 
-          key:Disable();
+          key:Disconnect();
           rawset(connections, index, nil);
         end;
         for index, key in next, other_connections do 
-            key:Disable();
+            key:Disconnect();
             rawset(other_connections, index, nil);
         end;
       end;
