@@ -3,7 +3,7 @@
     sturmgeist#0001
 ]]
 -- key handling keys
-getgenv().enable_key = 'C';
+getgenv().enablekey = 'C';
 getgenv().terminate_key = 'B';
 getgenv().enabled = false; -- idc about your script please tell the skid who made your script to use other key names
 -- position related keys
@@ -24,35 +24,31 @@ UserInputService = game:GetService('UserInputService');
 function getClientScreenResolution() 
     return workspace.CurrentCamera.ViewportSize.X, workspace.CurrentCamera.ViewportSize.Y;
 end; -- this will change if in first person
--- select(1, getClientScreenResolution()) --> X
--- select(2, getClientScreenResolution()) --> Y
 function getMousePos() 
-    local _ = Players.LocalPlayer:GetMouse();
-    return _.X, _.Y;
+    local  = Players.LocalPlayer:GetMouse();
+    return Vector2.new(.X, .Y)
 end;
--- select(1, getMousePos()) --> X
--- select(2, getMousePos()) --> Y
 
 table.insert(connections, RunService.RenderStepped:Connect(function()
     -- mouse pos y negative = top of screen
     -- mouse pos y positive - resolution y > 400 bottom of screen
     if (getgenv().enabled) then 
       local screen_res = table.pack(getClientScreenResolution());
-      local mouse_pos = table.pack(getMousePos());
-      if (mouse_pos[2] < accurate_positive_y_offset) then
+      local mouse_pos = getMousePos();
+      if (mouse_pos.Y < accurate_positive_y_offset) then
         if not mousemoverel then 
-            VirtualInputManager:SendMouseMoveEvent(mouse_pos[1], mouse_pos[2] + y_offset, game);
+            VirtualInputManager:SendMouseMoveEvent(mouse_pos.X, mouse_pos.Y + y_offset, game);
         else
-            mousemoverel(mouse_pos[1], mouse_pos[2] + y_offset);
+            mousemoverel(mouse_pos.X, mouse_pos.Y + y_offset);
         end; -- if top
-      elseif (mouse_pos[2] >= (screen_res[2] - accurate_negative_y_offset)) then
+      elseif (mouse_pos.Y >= (screen_res[2] - accurate_negative_y_offset)) then
         if not mousemoverel then 
-            VirtualInputManager:SendMouseMoveEvent(mouse_pos[1], mouse_pos[2] + negative_y_offset, game);
+            VirtualInputManager:SendMouseMoveEvent(mouse_pos.X, mouse_pos.Y + negative_y_offset, game);
         else
-            mousemoverel(mouse_pos[1], mouse_pos[2] + negative_y_offset);
+            mousemoverel(mouse_pos.X, mouse_pos.Y + negative_y_offset);
         end; -- if bottom
        ----------------end
-      end;  
+      end;
     end;
 end));
 
