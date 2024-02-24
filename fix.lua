@@ -3,7 +3,7 @@
     sturmgeist#0001
 ]]
 -- key handling keys
-getgenv().enablekey = 'C';
+getgenv().enable_key = 'C';
 getgenv().terminate_key = 'B';
 getgenv().enabled = false; -- idc about your script please tell the skid who made your script to use other key names
 -- position related keys
@@ -25,8 +25,8 @@ function getClientScreenResolution()
     return workspace.CurrentCamera.ViewportSize.X, workspace.CurrentCamera.ViewportSize.Y;
 end; -- this will change if in first person
 function getMousePos() 
-    local  = Players.LocalPlayer:GetMouse();
-    return Vector2.new(.X, .Y)
+    local _ = Players.LocalPlayer:GetMouse();
+    return Vector2.new(_.X, _.Y)
 end;
 
 table.insert(connections, RunService.RenderStepped:Connect(function()
@@ -48,7 +48,7 @@ table.insert(connections, RunService.RenderStepped:Connect(function()
             mousemoverel(mouse_pos.X, mouse_pos.Y + negative_y_offset);
         end; -- if bottom
        ----------------end
-      end;
+      end;  
     end;
 end));
 
@@ -78,4 +78,4 @@ table.insert(other_connections, UserInputService.InputBegan:Connect(function(key
       end;
   end;
 end));
--- dm sturmgeist#0001 if broken or smth :happy: 🎉✨✨
+-- dm sturmgeist#0001 if broken or smth <:happy:1145312378028818452> 🎉✨✨
